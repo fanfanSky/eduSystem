@@ -1,0 +1,13 @@
+/* html和body都生效 */
+html,
+body {
+  /* 添加高度 */
+  height: 100%;
+}
+
+/* 所有的都命中 */
+* {
+  /* 去掉 间隙 */
+  margin: 0;
+  padding: 0;
+}

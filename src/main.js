@@ -11,6 +11,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 // 注册Element-ui
 Vue.use(ElementUI);
 
+//导入全局样式
 import './style/base.css';
 
 //是否显示生产提示
