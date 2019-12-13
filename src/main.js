@@ -8,7 +8,7 @@ import router from './router/router.js'
 import ElementUI from 'element-ui';
 // 导入饿了么 的样式
 import 'element-ui/lib/theme-chalk/index.css';
-// 注册一下
+// 注册Element-ui
 Vue.use(ElementUI);
 
 import './style/base.css';
@@ -16,6 +16,7 @@ import './style/base.css';
 //是否显示生产提示
 Vue.config.productionTip = false
 
+// 创建 Vue 实例
 new Vue({
   render: h => h(App),
   // 挂载到Vue示例上 router
