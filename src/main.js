@@ -1,4 +1,6 @@
+//导入Vue
 import Vue from 'vue'
+// 导入 根组件
 import App from './App.vue'
 // 导入接收 路由
 import router from './router/router.js'
@@ -9,7 +11,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 // 注册一下
 Vue.use(ElementUI);
 
+import './style/base.css';
 
+//是否显示生产提示
 Vue.config.productionTip = false
 
 new Vue({
