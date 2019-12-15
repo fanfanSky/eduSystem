@@ -64,13 +64,13 @@
     </div>
     <img class="login-pic" src="../../assets/login_banner_ele.png" alt="" />
     <!-- 注册的对话框 -->
-    <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
-      <el-form :model="form">
-        <el-form-item label="昵称" :label-width="formLabelWidth">
+    <el-dialog title="用户注册" :visible.sync="dialogFormVisible">
+      <el-form :model="form" :rules="rules">
+        <el-form-item label="头像" :label-width="formLabelWidth" prop="reg_header">
           <!-- 头像上传 -->
           <el-upload
             class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"  
+            action="http://127.0.0.1/heimamm/public/uploads"  
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
@@ -79,22 +79,22 @@
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
-        <el-form-item label="昵称" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+        <el-form-item label="昵称" :label-width="formLabelWidth" prop="reg_nickname">
+          <el-input v-model="form.nickname" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+        <el-form-item label="邮箱" :label-width="formLabelWidth" prop="reg_email">
+          <el-input v-model="form.email" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="手机" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+        <el-form-item label="手机" :label-width="formLabelWidth" prop="reg_phone">
+          <el-input v-model="form.register_phone" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="密码" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+        <el-form-item label="密码" :label-width="formLabelWidth" prop="reg_password">
+          <el-input v-model="form.register_password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="图形码" :label-width="formLabelWidth">
           <el-row>
             <el-col :span="16">
-              <el-input v-model="form.name" autocomplete="off"></el-input>
+              <el-input v-model="form.picCode" autocomplete="off"></el-input>
             </el-col>
             <el-col :offset="1" :span="7">
               <!--注册页验证码图片-->
@@ -109,7 +109,7 @@
         <el-form-item label="验证码" :label-width="formLabelWidth">
           <el-row>
             <el-col :span="16"
-              ><el-input v-model="form.name" autocomplete="off"></el-input
+              ><el-input v-model="form.register_captcha" autocomplete="off"></el-input
             ></el-col>
             <el-col :span="7" :offset="1">
               <el-button>获取用户验证码</el-button>
@@ -131,7 +131,7 @@ export default {
   name: "login",
   data() {
     // 自定义校验规则的函数
-    // 手机号
+    // 登录手机号
     var checkPhone = (rule, value, callback) => {    //验证的函数
       if (!value) {
         return callback(new Error("手机号不能为空"));
@@ -149,6 +149,7 @@ export default {
         }
       }
     };
+    
 
     return {    //绑定的数据
       // 表单的数据
@@ -157,11 +158,16 @@ export default {
         password: "",
         captcha: "",
         // 是否勾选
-        checked: false
+        checked: false,
+        reg_header:"",
+        reg_nickname:"",
+        reg_email:"",
+        reg_phone:"",
+        reg_password:""
       },
-      // 定义校验规则
-      rules: {
-        phone: [{ required: true, validator: checkPhone, trigger: "blur" }],
+      // 定义校验规则 
+      rules: {     //required: 表示前面有个小星(*)号
+        phone: [{ required: true, validator: checkPhone, trigger: "blur" }], 
         password: [
           {
             required: true,
@@ -187,7 +193,43 @@ export default {
             message: "验证码长度为4",
             trigger: "change"
           }
+        ],
+        reg_header:[
+          {
+            required: true,
+            message: "请上传头像",
+            trigger: "blur"
+          }
+        ],
+        reg_nickname:[
+          {
+            required: true,
+            message: "请设置昵称",
+            trigger: "blur"
+          }
+        ],
+        reg_email:[
+          {
+            required: true,
+            message: "请填写您的邮箱",
+            trigger: "blur"
+          }
+        ],
+        reg_phone:[
+          {
+            required: true,
+            message: "请填写您的联系方式",
+            trigger: "blur"
+          }
+        ],
+        reg_password:[
+          {
+            required: true,
+            message: "请填写您的联系方式",
+            trigger: "blur"
+          }
         ]
+
       },
       // 验证码地址
       captchaURL : process.env.VUE_APP_BASEURL + "/captcha?type=login",
@@ -209,10 +251,10 @@ export default {
         this.$refs.form.validate(valid => {  
           if (valid) {
             // 验证成功
-            // this.$message.success("恭喜你，成功啦");
+            this.$message.success("恭喜你，成功啦");
             // 调用接口
             axios({
-                url:process.env.VUE_APP_BASEURL+'/login',
+                url:process.env.VUE_APP_BASEURL+"/login",
                 method:"post",
                 // 设置跨域请求可以携带cookie  默认为false
                 withCredentials:true,
@@ -245,22 +287,22 @@ export default {
     },
     // 上传的方法
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+        this.imageUrl = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
+        const isJPG = file.type === "image/jpeg";
+        const isLt2M = file.size / 1024 / 1024 < 2;
 
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      return isJPG && isLt2M;
+        if (!isJPG) {
+            this.$message.error("上传头像图片只能是 JPG 格式!");
+        }
+        if (!isLt2M) {
+            this.$message.error("上传头像图片大小不能超过 2MB!");
+        }
+        return isJPG && isLt2M;
     }
 
-  }
+    }
 };
 </script>
 <style lang="less">
@@ -380,6 +422,9 @@ export default {
     width: 178px;
     height: 178px;
     display: block;
+  }
+  .dialog-footer {
+    text-align: center;
   }
 }
 </style>
