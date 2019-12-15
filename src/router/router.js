@@ -8,7 +8,7 @@ import login from '../views/login/login.vue'
 
 // Use一下 注册
 Vue.use(VueRouter)
-// 规则
+// 规则(创建路由对象)
 const routes = [
     {
         path:"/login",
@@ -19,5 +19,5 @@ const routes = [
 const router = new VueRouter({
     routes // routes:routes
 })
-// 暴露出去
+// 把路由对象暴露出去
 export default router
