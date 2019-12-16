@@ -17,6 +17,9 @@ import './style/base.css';
 //是否显示生产提示
 Vue.config.productionTip = false
 
+// 测试环境变量
+window.console.log(process.env.VUE_APP_BASEURL)
+
 // 创建 Vue 实例
 new Vue({
   render: h => h(App),
