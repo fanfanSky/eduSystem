@@ -1,5 +1,5 @@
 <template>
-    <div>我是一个帅帅滴首页</div>
+    <div>我是一个帅帅滴首页呀!</div>
 </template>
 
 <script>
