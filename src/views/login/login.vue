@@ -213,6 +213,8 @@ export default {
         ]
       },
       regRules: {
+        //头像
+        avatar:[{ required: true,message: "请选择一张相片作为您的头像", trigger: "blur" }],
         // 手机号
         phone: [{ required: true, validator: checkPhone, trigger: "blur" }],
         // 密码

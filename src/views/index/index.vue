@@ -69,7 +69,6 @@ export default {
 .index-container {
   height: 100%;
   .my-header {
-    // background-color: skyblue;
     display: flex;
     justify-content: space-between;
     .left {
