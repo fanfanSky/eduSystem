@@ -3,8 +3,10 @@ import Vue from 'vue'
 // 导包
 import VueRouter from 'vue-router'
 
-// 导入 login 组件
+// 导入 登录 组件
 import login from '../views/login/login.vue' 
+// 导入 首页 组件
+import index from '../views/index/index.vue'
 
 // Use一下 注册
 Vue.use(VueRouter)
@@ -13,6 +15,10 @@ const routes = [
     {
         path:"/login",
         component:login
+    },
+    {
+        path: "/index",
+        component: index
     }
 ];
 // 创建
