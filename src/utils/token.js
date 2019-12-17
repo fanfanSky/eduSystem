@@ -1,3 +1,5 @@
+// 注意: 工作中功能函数一般架构来写
+
 // 定义token的key
 // 用作key的常量 一般会写成全部大写
 const KEY = "mmtoken";
