@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App.vue'
 // 导入接收 路由
 import router from './router/router.js'
+// 导入 仓库
+import store from './store/store.js'
+
 // 导入饿了么 ui
 import ElementUI from 'element-ui';
 // 导入饿了么 的样式
@@ -24,5 +27,6 @@ window.console.log(process.env.VUE_APP_BASEURL)
 new Vue({
   render: h => h(App),
   // 挂载到Vue示例上 router
-  router // router:router
+  router, // router:router
+  store
 }).$mount('#app')
