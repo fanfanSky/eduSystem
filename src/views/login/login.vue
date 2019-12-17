@@ -308,11 +308,11 @@ export default {
               code: this.form.captcha
             }).then(res => {
               window.console.log(res);
+
             });
           } else {
             // 验证失败
             this.$message.error("很遗憾，内容没有写对！");
-
             return false;
           }
         });
@@ -380,7 +380,7 @@ export default {
           if (this.time == 0) {
             clearInterval(interId);
           }
-        }, 1000);
+        }, 100);
 
         // 手机号 图片验证码 都ok
         // axios({
@@ -397,7 +397,7 @@ export default {
           phone: this.regForm.phone,
           code: this.regForm.code
         }).then(res => {
-          // window.console.log(res);
+          window.console.log(res);
           if (res.data.code === 200) {
             this.$message.success("短信验证码是:" + res.data.data.captcha);
           }
