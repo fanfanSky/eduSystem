@@ -1,5 +1,5 @@
 // 导入 axios
-import axios from "axios";
+import axios from "axios"; 
 
 // 导入 token的工具函数
 import {getToken} from '../utils/token.js'
@@ -14,7 +14,6 @@ const instance = axios.create({
     withCredentials: true
 });
 
-
 // 暴露方法 获取用户信息
 export function userInfo() {
     return instance({
@@ -28,6 +27,7 @@ export function userInfo() {
         }
     })
 }
+
 // 用户退出
 export function userLogout() {
     return instance({
