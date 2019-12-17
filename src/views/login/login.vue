@@ -331,7 +331,7 @@ export default {
           }
         });
       }
-    },
+    },  
     // 重新获取验证码
     changeCaptcha() {
       // this.captchaURL =
