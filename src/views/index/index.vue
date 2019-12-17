@@ -19,11 +19,11 @@
         <!-- 导航菜单 -->
         <el-menu
           router
-          default-active="/index/user"
+          :default-active="$route.path"
           :collapse="isCollapse"
           class="el-menu-vertical-demo"
         >
-          <el-menu-item index="1">
+          <el-menu-item index="/index/chart">
             <i class="el-icon-pie-chart"></i>
             <span slot="title">数据概览</span>
           </el-menu-item>
@@ -31,11 +31,11 @@
             <i class="el-icon-user"></i>
             <span slot="title">用户列表</span>
           </el-menu-item>
-          <el-menu-item index="3">
+          <el-menu-item index="/index/question">
             <i class="el-icon-edit-outline"></i>
             <span slot="title">题库列表</span>
           </el-menu-item>
-          <el-menu-item index="4">
+          <el-menu-item index="/index/enterprise">
             <i class="el-icon-office-building"></i>
             <span slot="title">企业列表</span>
           </el-menu-item>
