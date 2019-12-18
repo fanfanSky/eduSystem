@@ -38,6 +38,7 @@ const routes = [{
     {
         path: "/index",
         component: index,
+        redirect: '/index/subject',   //重定向到首页的学科页面
         children: [{
                 path: "subject", // /index/subject
                 component: subject
