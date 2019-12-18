@@ -32,6 +32,7 @@
                 </el-form-item>
             </el-form>
         </el-card>
+        
         <el-card class="box-card_2">
             <el-table :data="tableData" style="width: 100%">
                 <el-table-column class="serial" prop="serial" label="序号" width="70"></el-table-column>
