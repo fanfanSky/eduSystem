@@ -50,9 +50,16 @@
                 </el-table-column>    
             </el-table>
             <!-- 分页器 -->
-            <el-pagination background class="page"
-                :page-sizes="[100, 200, 300, 400]" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
+            <el-pagination 
+                background
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="page"
+                :page-sizes="pageSizes"
+                :page-size="limit"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="total"
+            >
             </el-pagination>
         </el-card>
         <!-- 新增框 -->
@@ -102,14 +109,31 @@ export default {
             //页码
             page:1,
             //每一页多少条
-            limit:6,
-
+            limit:2,
+            //页容量选项  数组
+            pageSizes:[2,4,6,9],
+            // 总条数
+            total: 0
         }
     },
     created() {
         this.getData();
     },
     methods: {
+        //页码改变
+        handleCurrentChange(page){
+            // window.console.log(page);
+            //保存页码
+            this.page = page
+            //重新获取数据
+            this.getData();
+        },
+        //页容量改变  回调函数
+        handleSizeChange(size){
+            // window.console.log(size);
+            this.limit = size;
+            this.getData();
+        },
         // 清空筛选
         clear(){
             //这是一个对象,for...in..遍历
@@ -161,7 +185,9 @@ export default {
             }).then(res=>{
                 // window.console.log(res);
                 //保存表格数据
-                this.tableData = res.data.items
+                this.tableData = res.data.items;
+                // 保存总条数
+                this.total = res.data.pagination.total;
             })
         }
     },
