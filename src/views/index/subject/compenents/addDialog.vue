@@ -74,7 +74,7 @@ export default {
         } else {
           // 错
           this.$message.error("小老弟，数据不太对哦，检查一下呗！");
-          return false;   
+          return false;     
         }
       });
     }

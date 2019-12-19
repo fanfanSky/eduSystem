@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 头部卡片 -->
-        <el-card class="box-card">
+        <el-card>
             <el-form :inline="true" :model="formInline" class="demo-form-inline">
                 <el-form-item label="学科编号">
                     <el-input class="number_1" v-model="formInline.rid"></el-input>
@@ -35,7 +35,7 @@
                 <el-table-column prop="username" label="创建者" width="150"></el-table-column>
                 <el-table-column prop="create_time" label="创建日期" ></el-table-column>
                 <el-table-column prop="status" label="状态" >
-                    <template slot-scope="scope">
+                    <template slot-scope="scope">   
                         <span v-if="scope.row.status === 1">启用</span>
                         <span class="red" v-else>禁用</span>
                     </template>
@@ -43,6 +43,7 @@
                 <el-table-column label="操作">
                     <template slot-scope="scope">
                         <el-button type="text" @click="showEdit(scope.row)">编辑</el-button>
+                        <!-- scope.row 表示的是正行的数据 -->
                         <el-button type="text" @click="changeStatus(scope.row)">{{ scope.row.status === 1 ? "禁用" : "启用" }}</el-button>
                         <el-button type="text" @click="removeItem(scope.row)">删除</el-button>
                     </template>
@@ -63,10 +64,9 @@
 <script>
 // 导入组件 新增框
 import addDialog from "./compenents/addDialog.vue";
-import { subjectList } from '../../../api/subject';
 
 // 导入接口
-// import { subjectList, subjectRemove,subjectStatus } from "../../../api/subject.js";
+import { subjectList,subjectStatus,subjectRemove } from "../../../api/subject.js";
 
 export default {
     name:"subject",
@@ -110,61 +110,113 @@ export default {
         this.getData();
     },
     methods: {
+        //删除学科
+        removeItem(item){
+            this.$confirm("你真的要删吗?","友情提示",{
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            }).then(()=>{
+                //确定要删后的处理逻辑
+                subjectRemove({
+                    //需要请求删除的id
+                    id:item.id
+                }).then(res=>{
+                    if(res.code===200){
+                        this.$message.success("删除成功!");
+                        this.getData();
+                    }
+                });
+            })
+        },
+        // removeItem(item){
+        //     this.$confirm("真的确定要删除该选项吗???","友情提示"({
+        //         confirmButtonText: "确定",
+        //         cancelButtonText: "取消",
+        //         type: "warning"
+        //     }).then(res=>{
+        //         //确定要删
+        //         subjectRemove({
+        //             id:item.id
+        //         }).then(res=>{
+        //             if(res.code===200){
+        //                 this.$message.success("恭喜呀!删除成功啦!!!");
+        //                 // OK之后在调用一次学科列表进行页面刷新
+        //                 this.getData();
+        //             }
+        //         })
+        //     }),
+        // },
+        //修改状态
+        changeStatus(item){
+            subjectStatus({
+                id:item.id
+            }).then(res=>{
+                if(res.code===200){
+                    this.$message.success("恭喜!状态刷新了咯...");
+                    // OK之后在调用一次学科列表进行页面刷新
+                    this.getData();
+                }
+            })
+        },
+
+        //获取学科列表数据
         getData(){
             // 传递一个参数
             subjectList({
                 page:this.page,
                 limit:this.limit
             }).then(res=>{
-                window.console.log(res);
+                // window.console.log(res);
                 //保存表格数据
                 this.tableData = res.data.items
             })
-            
-
         }
     },
 }
 </script>
 
 <style lang="less">
-    .demo-form-inline {
-        .number_1, .establish {
-            width: 100px;
+.demo-form-inline {
+    .number_1, .establish {
+        width: 100px;
+    }
+    .name, .status {
+        width: 149px;
+    }
+    .search, .clear {
+        width: 70px;
+    }
+    .add {
+        width: 117px;
+    }
+    .add i {
+        width: 14px;
+        height: 14px;
+        font-weight: bold;    
+    }
+}
+div {
+    .body-card {
+        text-align: center;
+        margin-top: 19px;
+        .sbj_edite {
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+            color: rgb(64, 158, 255);
+            margin-left: 2px;
+            padding: 1px 3px 1px 3px;
         }
-        .name, .status {
-            width: 149px;
+        .page {
+            margin-top: 30px;
         }
-        .search, .clear {
-            width: 70px;
-        }
-        .add {
-            width: 117px;
-        }
-        .add i {
-            width: 14px;
-            height: 14px;
-            font-weight: bold;    
+        // 高亮的span
+        span.red {
+            color: #ff4b4b;
         }
     }
-    div {
-        .body-card {
-            text-align: center;
-            margin-top: 19px;
-            .sbj_edite {
-                border: none;
-                background-color: rgba(0, 0, 0, 0);
-                color: rgb(64, 158, 255);
-                margin-left: 2px;
-                padding: 1px 3px 1px 3px;
-            }
-            .page {
-                margin-bottom: 10px;
-                margin-top: 26px;
-            }
-        }
-    }
-    // 对话框
+}
+// 对话框
 .el-dialog {
 width: 600px;
     .el-dialog__header {
