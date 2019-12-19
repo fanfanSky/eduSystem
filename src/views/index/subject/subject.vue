@@ -107,9 +107,9 @@ export default {
             addFormVisible:false,
             //页数据
             //页码
-            page:1,
+            page:1,     //给个默认值
             //每一页多少条
-            limit:2,
+            limit:2,    //给个默认值
             //页容量选项  数组
             pageSizes:[2,4,6,9],
             // 总条数
@@ -146,13 +146,13 @@ export default {
         },
         //删除学科
         removeItem(item){
-            this.$confirm("你真的要删吗?","友情提示",{
+            this.$confirm(`你真的要删"${item.intro}"吗?`,"友情提示",{
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"
             }).then(()=>{
-                //确定要删后的处理逻辑
-                subjectRemove({
+                //确定要删之后的处理逻辑  
+                subjectRemove({   //调用移除接口
                     //需要请求删除的id
                     id:item.id
                 }).then(res=>{
@@ -160,8 +160,8 @@ export default {
                         this.$message.success("删除成功!");
                         this.getData();
                     }
-                });
-            })
+                })
+            }).catch(()=>{});
         },
         //修改状态
         changeStatus(item){
@@ -169,7 +169,7 @@ export default {
                 id:item.id
             }).then(res=>{
                 if(res.code===200){
-                    this.$message.success("恭喜!状态刷新了咯...");
+                    this.$message.success("恭喜!已切换咯...");
                     // OK之后在调用一次学科列表进行页面刷新
                     this.getData();
                 }
