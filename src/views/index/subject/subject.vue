@@ -19,8 +19,8 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" >搜索</el-button>
-                    <el-button >清除</el-button>
+                    <el-button type="primary" @click="getData">搜索</el-button>
+                    <el-button @click="clear">清除</el-button>
                     <el-button @click="addFormVisible = true" type="primary" icon="el-icon-plus">新增学科</el-button>
                 </el-form-item>
             </el-form>
@@ -110,6 +110,16 @@ export default {
         this.getData();
     },
     methods: {
+        // 清空筛选
+        clear(){
+            //这是一个对象,for...in..遍历
+            for(const key in this.formInline){
+                //清空对象里面的值
+                this.formInline[key] = "";
+            }
+            //重新获取学科列表的数据
+            this.getData();
+        },
         //删除学科
         removeItem(item){
             this.$confirm("你真的要删吗?","友情提示",{
@@ -129,24 +139,6 @@ export default {
                 });
             })
         },
-        // removeItem(item){
-        //     this.$confirm("真的确定要删除该选项吗???","友情提示"({
-        //         confirmButtonText: "确定",
-        //         cancelButtonText: "取消",
-        //         type: "warning"
-        //     }).then(res=>{
-        //         //确定要删
-        //         subjectRemove({
-        //             id:item.id
-        //         }).then(res=>{
-        //             if(res.code===200){
-        //                 this.$message.success("恭喜呀!删除成功啦!!!");
-        //                 // OK之后在调用一次学科列表进行页面刷新
-        //                 this.getData();
-        //             }
-        //         })
-        //     }),
-        // },
         //修改状态
         changeStatus(item){
             subjectStatus({
