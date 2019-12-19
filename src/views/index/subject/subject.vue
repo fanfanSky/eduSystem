@@ -28,7 +28,7 @@
     <!-- 身体卡片 -->
     <el-card class="body-card">
         <el-table :data="tableData" style="width: 100%">
-            <el-table-column type="index" label="序号"> </el-table-column>
+            <el-table-column type="index" label="序号" width="60"> </el-table-column>
             <el-table-column prop="rid" label="学科编号"> </el-table-column>
             <el-table-column prop="name" label="学科名称"> </el-table-column>
             <el-table-column prop="short_name" label="简称"> </el-table-column>
@@ -107,13 +107,23 @@ export default {
             ],
             //新增对话框的数据
             //是否显示新增对话框
-            addFormvisible:false
+            addFormvisible:false,
+            // 页数据
+            // 页码
+            page : 1,
+            //每一页多少条
+            limit:6
         };
     },
     created() {
-        subjectList().then(res=>{
-            window.console.log(res);
-        })
+        subjectList({
+            page:this.page,
+            limit:this.limit
+        }).then(res=>{
+            // window.console.log(res);
+            // 保存表格数据
+            this.tableData = res.data.items
+        });
     },
 }
 </script>
