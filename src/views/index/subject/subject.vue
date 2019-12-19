@@ -61,15 +61,20 @@
         </el-pagination>
     </el-card>
     <!-- 新增框 -->
-
+    <addDialog></addDialog>
     <!-- 编辑框框 -->
 
     </div>
 </template>
 <script>
-
-
+//导入组件
+import addDialog from "./compenents/addDialog.vue"
 export default {
+    name:"subject",
+    //注册组件
+    components:{
+        addDialog
+    },
     data() {
         return {
             //顶部的行内表单
@@ -97,7 +102,10 @@ export default {
                     address: "上海市普陀区金沙江路 1516 弄"
                 }
             ],
-        }
+            //新增对话框的数据
+            //是否显示新增对话框
+            addFormvisible:false
+        };
     },
 }
 </script>
@@ -107,13 +115,13 @@ export default {
     .head-card {
         // 设置按钮的容器尺寸
         .el-form-item__content {
-        width: 149px;
+            width: 149px;
         }
         .short-input .el-form-item__content {
-        width: 100px;
+            width: 100px;
         }
         .btn-form-item .el-form-item__content {
-        width: 100%;
+            width: 100%;
         }
     }
 
