@@ -9,8 +9,8 @@
         <span class="title">黑马面面</span>
       </div>
       <div class="right">
-        <img class="user-icon" :src="$store.state.userInfo.avatar" alt="" />
-        <span class="user-name">{{$store.state.userInfo.username}},您好</span>
+        <img class="user-icon" :src="userInfo.avatar" alt="" />
+        <span class="user-name">{{userInfo.username}},您好</span>
         <el-button @click="logout" type="primary" size="small">退出</el-button>
       </div>
     </el-header>
@@ -63,7 +63,7 @@ export default {
       // 是否折叠
       isCollapse: false,
       // 用户信息
-      userInfo: {}
+      // userInfo: {}
     };
   },
   // 方法
@@ -94,6 +94,13 @@ export default {
             message: "你是个好人！"
           });
         });
+    }
+  },
+  // 计算属性简化Vuex数据获取
+  computed: {
+    userInfo(){
+      //直接返回仓库的用户数据即可
+      return this.$store.state.userInfo;
     }
   },
   // 创建完成之前钩子 迁移到导航守卫中

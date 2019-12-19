@@ -94,7 +94,7 @@ router.beforeEach((to, from, next) => {
             // 如果有token 继续走
             // next()
             userInfo().then(res => {
-                window.console.log(res);
+                // window.console.log(res);
                 // 如果获取成功 保存用户信息
                 if (res.data.code === 200) {
                     // token 是对的 放走

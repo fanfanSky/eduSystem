@@ -1,3 +1,9 @@
+/*
+ * @Date: 2019-12-18 13:15:58
+ * @LastEditTime: 2019-12-19 15:25:58
+ * @Author: 江帆
+ * @Github: https://github.com/J-Fan-Fan/
+ */
 //导入Vue
 import Vue from 'vue'
 // 导入 根组件
@@ -21,7 +27,7 @@ import './style/base.css';
 Vue.config.productionTip = false
 
 // 测试环境变量
-window.console.log(process.env.VUE_APP_BASEURL)
+// window.console.log(process.env.VUE_APP_BASEURL)
 
 // 创建 Vue 实例
 new Vue({
