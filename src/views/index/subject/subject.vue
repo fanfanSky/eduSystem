@@ -69,6 +69,9 @@
 <script>
 //导入组件
 import addDialog from "./compenents/addDialog.vue"
+//导入接口
+import {subjectList} from "../../../api/subject.js"
+
 export default {
     name:"subject",
     //注册组件
@@ -106,6 +109,11 @@ export default {
             //是否显示新增对话框
             addFormvisible:false
         };
+    },
+    created() {
+        subjectList().then(res=>{
+            window.console.log(res);
+        })
     },
 }
 </script>
