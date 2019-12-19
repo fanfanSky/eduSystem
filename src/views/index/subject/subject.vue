@@ -76,7 +76,7 @@ export default {
     name:"subject",
     //注册组件
     components:{
-        addDialog
+        addDialog 
     },
     data() {
         return {
@@ -115,15 +115,21 @@ export default {
             limit:6
         };
     },
+    methods: {
+        getData(){
+            //传递一个参数
+            subjectList({
+                page:this.page,
+                limit:this.limit
+            }).then(res=>{
+                // window.console.log(res);
+                // 保存表格数据
+                this.tableData = res.data.items
+            });
+        }
+    },
     created() {
-        subjectList({
-            page:this.page,
-            limit:this.limit
-        }).then(res=>{
-            // window.console.log(res);
-            // 保存表格数据
-            this.tableData = res.data.items
-        });
+        this.getData();
     },
 }
 </script>
@@ -133,7 +139,7 @@ export default {
     .head-card {
         // 设置按钮的容器尺寸
         .el-form-item__content {
-            width: 149px;
+            width: 144px;
         }
         .short-input .el-form-item__content {
             width: 100px;
