@@ -64,13 +64,16 @@
         </el-card>
         <!-- 新增框 -->
         <addDialog></addDialog>
-
+        <!-- 编辑框 -->
+        <editDialog ref="editDialog"></editDialog>
     </div>
 </template>
 
 <script>
 // 导入组件 新增框
 import addDialog from "./compenents/addDialog.vue";
+// 导入组件 编辑框
+import editDialog from "./compenents/editDialog.vue";
 
 // 导入接口
 import { subjectList,subjectStatus,subjectRemove } from "../../../api/subject.js";
@@ -79,7 +82,7 @@ export default {
     name:"subject",
     // 注册组件
     components: {
-        addDialog,
+        addDialog,editDialog
     },
     data() {
         return {
@@ -105,6 +108,8 @@ export default {
             // 新增对话框的数据
             // 是否显示新增对话框
             addFormVisible:false,
+            // 是否显示编辑对话框
+            editFormVisible:false,
             //页数据
             //页码
             page:1,     //给个默认值
@@ -120,6 +125,17 @@ export default {
         this.getData();
     },
     methods: {
+        // 因为编辑需要带点击当前行的数据进行显示,而新增学科只需要判断是否显示对话框即可(判断布尔值),所以编辑需要写方法
+        //进入编辑状态
+        showEdit(item){
+            //显示对话框
+            this.editFormVisible = true;
+            // window.console.log(item);
+            // 通过ref赋值
+            // 复杂类型的赋值,是引用类型的地址
+            // JSON.parse(JSON.stringify(item))  属于深拷贝,对function无法拷贝
+            this.$refs.editDialog.editForm = JSON.parse(JSON.stringify(item));
+        },
         //页码改变
         handleCurrentChange(page){
             // window.console.log(page);
@@ -144,6 +160,13 @@ export default {
             //重新获取学科列表的数据
             this.getData();
         },
+        //每次添加学科时清除一下下里面的内容
+        // addFormVisible(){
+        //     for(const key in this.$refs.addForm){
+        //         //清空对象里面的值
+        //         this.$refs.addForm[key] = "";
+        //     }      
+        // },
         //删除学科
         removeItem(item){
             this.$confirm(`你真的要删"${item.intro}"吗?`,"友情提示",{
@@ -174,8 +197,7 @@ export default {
                     this.getData();
                 }
             })
-        },
-
+        }, 
         //获取学科列表数据
         getData(){
             // 传递一个参数
