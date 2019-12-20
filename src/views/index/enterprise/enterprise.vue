@@ -20,7 +20,7 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary">搜索</el-button>
-                    <el-button >清除</el-button>
+                    <el-button @click="clear">清除</el-button>
                     <el-button @click="addFormVisible = true" type="primary" icon="el-icon-plus">新增企业</el-button>
                 </el-form-item>
             </el-form>
@@ -36,7 +36,7 @@
                 <el-table-column prop="status" label="状态" >
                     <template >   
                         <span >启用</span>
-                        <!-- <span class="red">禁用</span> -->
+                        <!-- <span class="red" >禁用</span> -->
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
@@ -111,11 +111,19 @@ export default {
         this.getData()
     },
     methods: {
+        clear(){
+            for(const key in this.formInline){
+                //获取每一个属性
+                this.formInline[key] = ""
+            }
+            //重新获取一下数据
+            this.getData();
+        },
         getData(){
             //传递需要的参数来获取
             enterpriseList({
-                page:this.page,
-                limit:this.limit
+                //扩展运算符
+                ...this.formInline
             }).then(res=>{
                 if(res.code ===200){
                     window.console.log(res);
