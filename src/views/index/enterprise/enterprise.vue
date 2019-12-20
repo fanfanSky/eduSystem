@@ -52,7 +52,7 @@
             <el-pagination background class="page"
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="2"
+                :current-page="page"
                 :page-sizes="[100, 200, 300, 400]"
                 :page-size="100"
                 layout="total, sizes, prev, pager, next, jumper"
@@ -100,12 +100,24 @@ export default {
             // 新增对话框的数据
             //是否显示 新增企业 对话框
             addFormVisible:false,
-
+            //页数据
+            //页码
+            page:1,
+            //每一页多少条
+            limit:6
         }
     },
     created() {
-        enterpriseList().then(res=>{
-            window.console.log(res)
+        //传递需要的参数来获取
+        enterpriseList({
+            page:this.page,
+            limit:this.limit
+        }).then(res=>{
+            if(res.code ===200){
+                // window.console.log(res);
+                //保存请求到的列表数据
+                this.tableData = res.data.items
+            }
         })
     },
 }
