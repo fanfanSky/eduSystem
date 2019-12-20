@@ -68,6 +68,8 @@
 <script>
 ///导入组件 新增框 
 import addDialog from "./compnents/addDialog.vue"
+//导入接口
+import {enterpriseList} from "../../../api/enterprise.js"
 export default {
     name:"enterprise",
     // 注册组件
@@ -100,6 +102,11 @@ export default {
             addFormVisible:false,
 
         }
+    },
+    created() {
+        enterpriseList().then(res=>{
+            window.console.log(res)
+        })
     },
 }
 </script>
