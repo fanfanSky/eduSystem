@@ -56,29 +56,32 @@
             </el-pagination> 
         </el-card>
         <!-- 新增框 -->
-        <!-- <addDialog></addDialog> -->
+        <addDialog></addDialog>
 
     </div>
 </template>
 
 <script>
+// 导入组件 新增框
+import addDialog from "./components/addDialog.vue";
+
 //导入接口
 // import {userList} from "../../../api/user.js"
 export default {
     name:"user",
-
+    component:{
+        addDialog
+    },
     data() {
         return {
             // 顶部的 行内表单
             formInline: {
-                // 学科id
-                eid: "",
-                // 状态
-                status: "",
-                // 学科名称
+                // 用户名
                 name: "",
-                // 创建者
-                username: ""
+                // 邮箱
+                email: "",
+                // 状态
+                status: ""
             },
             // table的数据
             tableData:[

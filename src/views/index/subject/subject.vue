@@ -71,9 +71,9 @@
 
 <script>
 // 导入组件 新增框
-import addDialog from "./compenents/addDialog.vue";
+import addDialog from "./components/addDialog.vue";
 // 导入组件 编辑框
-import editDialog from "./compenents/editDialog.vue";
+import editDialog from "./components/editDialog.vue";
 
 // 导入接口
 import { subjectList,subjectStatus,subjectRemove } from "../../../api/subject.js";

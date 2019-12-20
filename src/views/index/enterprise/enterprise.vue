@@ -67,7 +67,7 @@
 
 <script>
 ///导入组件 新增框 
-import addDialog from "./compnents/addDialog.vue"
+import addDialog from "./components/addDialog.vue"
 //导入接口
 import {enterpriseList,enterpriseRemove,enterpriseStatus} from "../../../api/enterprise.js"
 export default {
