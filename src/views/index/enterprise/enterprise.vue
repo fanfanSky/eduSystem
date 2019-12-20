@@ -19,7 +19,7 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary">搜索</el-button>
+                    <el-button type="primary" @click="getData">搜索</el-button>
                     <el-button @click="clear">清除</el-button>
                     <el-button @click="addFormVisible = true" type="primary" icon="el-icon-plus">新增企业</el-button>
                 </el-form-item>
@@ -41,7 +41,7 @@
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
-                        <el-button type="text" >编辑</el-button>
+                        <el-button type="text" @click="sohwEdit(scope.row)">编辑</el-button>
                         <!-- scope.row 表示的是正行的数据 -->
                         <el-button type="text" @click="changeStatus(scope.row)">{{scope.row.status==1?"禁用":"启用"}}</el-button>
                         <el-button type="text" @click="removeItem(scope.row)">删除</el-button>
@@ -61,6 +61,8 @@
         </el-card>
         <!-- 新增框 -->
         <addDialog></addDialog>
+        <!-- 编辑框 -->
+        <editDialog ref="editDialog"></editDialog>
 
     </div>
 </template>
@@ -68,13 +70,16 @@
 <script>
 ///导入组件 新增框 
 import addDialog from "./compnents/addDialog.vue"
+///导入组件 新增框 
+import editDialog from "./compnents/editDialog.vue"
+
 //导入接口
 import {enterpriseList,enterpriseRemove,enterpriseStatus} from "../../../api/enterprise.js"
 export default {
     name:"enterprise",
     // 注册组件
     components:{
-        addDialog
+        addDialog,editDialog
     },
     data() {
         return {
@@ -100,6 +105,9 @@ export default {
             // 新增对话框的数据
             //是否显示 新增企业 对话框
             addFormVisible:false,
+            //是否显示 编辑企业信息 对话框
+            editFormVisible:false,
+
             //页数据
             //页码
             page:1,
@@ -115,6 +123,14 @@ export default {
         this.getData();
     },
     methods: {
+        //编辑
+        sohwEdit(item){
+            //显示对话框
+            this.editFormVisible = true;
+            // window.console.log(item);
+            //通过ref来赋值
+            this.$refs.editDialog.editForm = JSON.parse(JSON.stringify(item));
+        },
         //切换状态
         changeStatus(item){
             //调用接口
@@ -163,7 +179,7 @@ export default {
         },
         clear(){
             for(const key in this.formInline){
-                //获取每一个属性
+                //获取每一个属性并给他们赋空值
                 this.formInline[key] = ""
             }
             //重新获取一下数据
