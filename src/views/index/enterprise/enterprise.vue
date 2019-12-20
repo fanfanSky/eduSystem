@@ -29,7 +29,7 @@
         <el-card class="body-card">
             <el-table :data="tableData" style="width: 100%">
                 <el-table-column type="index" label="序号" width="70"></el-table-column>
-                <el-table-column prop="rid" label="企业编号" ></el-table-column>
+                <el-table-column prop="eid" label="企业编号" ></el-table-column>
                 <el-table-column prop="name" label="企业名称" ></el-table-column>
                 <el-table-column prop="username" label="创建者" width="150"></el-table-column>
                 <el-table-column prop="create_time" label="创建日期" ></el-table-column>
@@ -108,17 +108,22 @@ export default {
         }
     },
     created() {
-        //传递需要的参数来获取
-        enterpriseList({
-            page:this.page,
-            limit:this.limit
-        }).then(res=>{
-            if(res.code ===200){
-                // window.console.log(res);
-                //保存请求到的列表数据
-                this.tableData = res.data.items
-            }
-        })
+        this.getData()
+    },
+    methods: {
+        getData(){
+            //传递需要的参数来获取
+            enterpriseList({
+                page:this.page,
+                limit:this.limit
+            }).then(res=>{
+                if(res.code ===200){
+                    window.console.log(res);
+                    //保存请求到的列表数据
+                    this.tableData = res.data.items
+                }
+            })
+        }
     },
 }
 </script>

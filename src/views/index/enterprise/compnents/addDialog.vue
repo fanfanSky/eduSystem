@@ -19,8 +19,8 @@
         </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-        <el-button @click="$parent.addFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submitForm">确 定</el-button>
+            <el-button @click="$parent.addFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="submitForm">确 定</el-button>
         </div>
     </el-dialog>
 </template>
@@ -62,7 +62,7 @@ export default {
             enterpriseAdd(this.addForm).then(res => {
                 // window.console.log(res);
                 if (res.code === 201) {
-                this.$message.warning("学科编号已经存在了，请重新输入");
+                this.$message.warning("企业编号已经存在了，请重新输入");
                 } else if (res.code === 200) {
                 this.$message.success("恭喜你，新增成功啦！");
                 // 关闭弹框
