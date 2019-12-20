@@ -19,9 +19,9 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="getData">搜索</el-button>
-                    <el-button @click="clear">清除</el-button>
-                    <el-button @click="addFormVisible = true" type="primary" icon="el-icon-plus">新增企业</el-button>
+                    <el-button type="primary">搜索</el-button>
+                    <el-button >清除</el-button>
+                    <el-button type="primary" icon="el-icon-plus">新增企业</el-button>
                 </el-form-item>
             </el-form>
         </el-card>
@@ -34,37 +34,32 @@
                 <el-table-column prop="username" label="创建者" width="150"></el-table-column>
                 <el-table-column prop="create_time" label="创建日期" ></el-table-column>
                 <el-table-column prop="status" label="状态" >
-                    <template slot-scope="scope">   
-                        <span v-if="scope.row.status === 1">启用</span>
-                        <span class="red" v-else>禁用</span>
+                    <template >   
+                        <span >启用</span>
+                        <!-- <span class="red">禁用</span> -->
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
-                    <template slot-scope="scope">
-                        <el-button type="text" @click="showEdit(scope.row)">编辑</el-button>
+                    <template >
+                        <el-button type="text" >编辑</el-button>
                         <!-- scope.row 表示的是正行的数据 -->
-                        <el-button type="text" @click="changeStatus(scope.row)">{{ scope.row.status === 1 ? "禁用" : "启用" }}</el-button>
-                        <el-button type="text" @click="removeItem(scope.row)">删除</el-button>
+                        <el-button type="text" >启用</el-button>
+                        <el-button type="text" >删除</el-button>
                     </template>
                 </el-table-column>    
             </el-table>
             <!-- 分页器 -->
-            <el-pagination 
-                background
+            <el-pagination background 
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="page"
-                :page-sizes="pageSizes"
-                :page-size="limit"
+                :current-page="2"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
                 layout="total, sizes, prev, pager, next, jumper"
-                :total="total"
-            >
-            </el-pagination>
+                :total="400">
+            </el-pagination> 
         </el-card>
-        <!-- 新增框 -->
-        <addDialog></addDialog>
-        <!-- 编辑框 -->
-        <editDialog ref="editDialog"></editDialog>
+
     </div>
 </template>
 
@@ -84,6 +79,14 @@ export default {
                 // 创建者
                 username: ""
             },
+            // table的数据
+            tableData:[
+                {
+                    data:"2019-12-31",
+                    name:"江小帆",
+                    address:"广东省深圳市宝安区"
+                }
+            ]
         }
     },
 }

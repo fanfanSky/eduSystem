@@ -203,7 +203,8 @@ export default {
             // 传递一个参数
             subjectList({
                 page:this.page,
-                limit:this.limit
+                limit:this.limit,
+                ...this.formInline
             }).then(res=>{
                 // window.console.log(res);
                 //保存表格数据
