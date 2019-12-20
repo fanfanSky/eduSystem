@@ -206,7 +206,7 @@ export default {
                 limit:this.limit,
                 ...this.formInline
             }).then(res=>{
-                // window.console.log(res);
+                window.console.log(res);
                 //保存表格数据
                 this.tableData = res.data.items;
                 // 保存总条数

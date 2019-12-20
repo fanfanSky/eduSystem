@@ -44,7 +44,7 @@
                         <el-button type="text" >编辑</el-button>
                         <!-- scope.row 表示的是正行的数据 -->
                         <el-button type="text">{{scope.row.status==1?"禁用":"启用"}}</el-button>
-                        <el-button type="text" >删除</el-button>
+                        <el-button type="text" @click="removeItem(scope.row)">删除</el-button>
                     </template>
                 </el-table-column>    
             </el-table>
@@ -69,7 +69,7 @@
 ///导入组件 新增框 
 import addDialog from "./compnents/addDialog.vue"
 //导入接口
-import {enterpriseList} from "../../../api/enterprise.js"
+import {enterpriseList,enterpriseRemove} from "../../../api/enterprise.js"
 export default {
     name:"enterprise",
     // 注册组件
@@ -115,6 +115,24 @@ export default {
         this.getData();
     },
     methods: {
+        //删除数据
+        removeItem(item){
+            this.$confirm(`确定要删除"${item.intro}"吗?`, '友情提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                enterpriseRemove({
+                    id:item.id
+                }).then(res=>{
+                    if(res.code==200){
+                        this.$message.success("太好了,你终于删除了这家讨厌的公司了^_^");
+                        //重新获取数据
+                        this.getData();
+                    }
+                })
+            }).catch(() => {});
+        },
         //页码改变
         handleCurrentChange(page){
             window.console.log(page);
