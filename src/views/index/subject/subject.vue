@@ -50,7 +50,7 @@
                 </el-table-column>    
             </el-table>
             <!-- 分页器 -->
-            <el-pagination 
+            <el-pagination class="page"
                 background
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
@@ -255,8 +255,13 @@ div {
         span.red {
             color: #ff4b4b;
         }
+        //分页
+        el-pagination .page {
+            margin-top: 30px;
+        }
     }
 }
+
 // 对话框
 .el-dialog {
 width: 600px;

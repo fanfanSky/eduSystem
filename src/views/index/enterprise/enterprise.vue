@@ -4,7 +4,7 @@
         <el-card>
             <el-form :inline="true" :model="formInline" class="demo-form-inline">
                 <el-form-item label="企业编号">
-                    <el-input class="number_1" v-model="formInline.rid"></el-input>
+                    <el-input class="number_1" v-model="formInline.eid"></el-input>
                 </el-form-item>
                 <el-form-item label="企业名称">
                     <el-input class="name" v-model="formInline.name"></el-input>
@@ -21,7 +21,7 @@
                 <el-form-item>
                     <el-button type="primary">搜索</el-button>
                     <el-button >清除</el-button>
-                    <el-button type="primary" icon="el-icon-plus">新增企业</el-button>
+                    <el-button @click="addFormVisible = true" type="primary" icon="el-icon-plus">新增企业</el-button>
                 </el-form-item>
             </el-form>
         </el-card>
@@ -49,7 +49,7 @@
                 </el-table-column>    
             </el-table>
             <!-- 分页器 -->
-            <el-pagination background 
+            <el-pagination background class="page"
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="2"
@@ -59,19 +59,27 @@
                 :total="400">
             </el-pagination> 
         </el-card>
+        <!-- 新增框 -->
+        <addDialog></addDialog>
 
     </div>
 </template>
 
 <script>
+///导入组件 新增框 
+import addDialog from "./compnents/addDialog.vue"
 export default {
     name:"enterprise",
+    // 注册组件
+    components:{
+        addDialog
+    },
     data() {
         return {
             // 顶部的 行内表单
             formInline: {
                 // 学科id
-                rid: "",
+                eid: "",
                 // 状态
                 status: "",
                 // 学科名称
@@ -86,14 +94,18 @@ export default {
                     name:"江小帆",
                     address:"广东省深圳市宝安区"
                 }
-            ]
+            ],
+            // 新增对话框的数据
+            //是否显示 新增企业 对话框
+            addFormVisible:false,
+
         }
     },
 }
 </script>
 
 <style lang="less">
-    .demo-form-inline {
+.demo-form-inline {
     .number_1, .establish {
         width: 100px;
     }
@@ -129,6 +141,9 @@ div {
         // 高亮的span
         span.red {
             color: #ff4b4b;
+        }
+        el-pagination .page {
+            margin-top: 30px;
         }
     }
 }
