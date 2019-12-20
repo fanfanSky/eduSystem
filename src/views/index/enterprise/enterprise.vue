@@ -34,16 +34,16 @@
                 <el-table-column prop="username" label="创建者" width="150"></el-table-column>
                 <el-table-column prop="create_time" label="创建日期" ></el-table-column>
                 <el-table-column prop="status" label="状态" >
-                    <template >   
-                        <span >启用</span>
-                        <!-- <span class="red" >禁用</span> -->
+                    <template slot-scope="scope">   
+                        <span v-if="scope.row.status==1">启用</span>
+                        <span class="red" v-else>禁用</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
-                    <template >
+                    <template slot-scope="scope">
                         <el-button type="text" >编辑</el-button>
                         <!-- scope.row 表示的是正行的数据 -->
-                        <el-button type="text" >启用</el-button>
+                        <el-button type="text">{{scope.row.status==1?"禁用":"启用"}}</el-button>
                         <el-button type="text" >删除</el-button>
                     </template>
                 </el-table-column>    
