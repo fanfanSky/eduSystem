@@ -162,10 +162,11 @@ export default {
             this.getData();
         },
         clear(){
-            for(const key in this.formInline){
-                //获取每一个属性
-                this.formInline[key] = ""
-            }
+            // for(const key in this.formInline){
+            //     //获取每一个属性
+            //     this.formInline[key] = ""
+            // }
+            this.formInline = {};
             //重新获取一下数据
             this.getData();
         },
