@@ -17,6 +17,9 @@
         <el-form-item label="状态" :label-width="formLabelWidth">
             <el-input v-model="addForm.status" autocomplete="off"></el-input>
         </el-form-item>
+        <el-form-item label="备注" :label-width="formLabelWidth">
+            <el-input v-model="addForm.remark" autocomplete="off"></el-input>
+        </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
         <el-button @click="$parent.addFormVisible = false">取 消</el-button>
@@ -33,14 +36,16 @@ export default {
     return {
         // 表单数据
         addForm: {
-            // 编号
-            rid: "",
-            // 名字
-            name: "",
-            // 简称
-            short_name: "",
-            // 简介
-            intro: "",
+            // 用户名
+            username: "",
+            // 邮箱
+            email: "",
+            // 手机
+            phone: "",
+            // 角色
+            role_id: "",
+            // 状态
+            status :"",
             // 备注
             remark: ""
         },
@@ -48,8 +53,10 @@ export default {
         formLabelWidth: "80px",
         // 添加表单验证规则
         addFormRules: {
-            rid: [{ required: true, message: "学科编号不能为空", trigger: "blur" }],
-            name: [{ required: true, message: "学科名称不能为空", trigger: "blur" }]
+            username: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
+            email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }],
+            phone: [{ required: true, message: "手机号不能为空", trigger: "blur" }],
+            role_id: [{ required: true, message: "角色不能为空", trigger: "blur" }]
         }
         };
     },
@@ -61,7 +68,7 @@ export default {
             userAdd(this.addForm).then(res => {
                 // window.console.log(res);
                 if (res.code === 201) {
-                this.$message.warning("学科编号已经存在了，请重新输入");
+                this.$message.warning("用户名已经存在了，请重新输入");
                 } else if (res.code === 200) {
                 this.$message.success("恭喜你，新增成功啦！");
                 // 关闭弹框

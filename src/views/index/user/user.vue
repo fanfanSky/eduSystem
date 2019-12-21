@@ -17,7 +17,7 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary">搜索</el-button>
-                    <el-button @click="clear">清除</el-button>
+                    <el-button >清除</el-button>
                     <el-button @click="addFormVisible = true" type="primary" icon="el-icon-plus">新增用户</el-button>
                 </el-form-item>
             </el-form>
@@ -31,16 +31,16 @@
                 <el-table-column prop="role_id" label="角色"></el-table-column>
                 <el-table-column prop="remark" label="备注"></el-table-column>
                 <el-table-column prop="status" label="状态">
-                    <template slot-scope="scope">   
-                        <span v-if="scope.row.status==1">启用</span>
-                        <span class="red" v-else>禁用</span>
+                    <template >   
+                        <span >启用</span>
+                        <!-- <span class="red" >禁用</span> -->
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
-                        <el-button type="text" @click="showEdit(scope.row)">编辑</el-button>
-                        <el-button type="text" @click="changeStatus(scope.row)">{{ scope.row.status === 1 ? "禁用" : "启用" }}</el-button>
-                        <el-button type="text" @click="removeItem(scope.row)">删除</el-button>
+                        <el-button type="text" >编辑</el-button>
+                        <el-button type="text" >{{ scope.row.status === 1 ? "禁用" : "启用" }}</el-button>
+                        <el-button type="text" >删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -69,6 +69,7 @@ import addDialog from "./components/addDialog.vue";
 import {userList} from "../../../api/user.js"
 export default {
     name:"user",
+    //注册组件
     component:{
         addDialog
     },
@@ -92,7 +93,7 @@ export default {
                 }
             ],
             // 新增对话框的数据
-            //是否显示 新增企业 对话框
+            //是否显示 新增用户 对话框
             addFormVisible:false,
             //页数据
             //页码
@@ -106,18 +107,19 @@ export default {
         }
     },
     created() {
-        // this.getData();
-        //传递一个参数
-        userList({
-            page:this.page,
-            limit:this.limit
-        }).then(res=>{
-            // window.console.log(res);
-            this.tableData = res.data.data.items;
-        })
+        this.getData();
     },
     methods: {
-        
+        getData(){
+            //传递一个参数
+            userList({
+                page:this.page,
+                limit:this.limit
+            }).then(res=>{
+                // window.console.log(res);
+                this.tableData = res.data.data.items;
+            })
+        }
         
         
         // clear(){
