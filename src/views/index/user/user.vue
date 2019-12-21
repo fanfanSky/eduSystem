@@ -112,7 +112,8 @@ export default {
             page:this.page,
             limit:this.limit
         }).then(res=>{
-            window.console.log(res);
+            // window.console.log(res);
+            this.tableData = res.data.data.items;
         })
     },
     methods: {
