@@ -66,7 +66,7 @@
 import addDialog from "./components/addDialog.vue";
 
 //导入接口
-// import {userList} from "../../../api/user.js"
+import {userList} from "../../../api/user.js"
 export default {
     name:"user",
     component:{
@@ -106,25 +106,32 @@ export default {
         }
     },
     created() {
-        this.getData();
+        // this.getData();
+        //传递一个参数
+        userList({
+            page:this.page,
+            limit:this.limit
+        }).then(res=>{
+            window.console.log(res);
+        })
     },
     methods: {
         
         
         
-        clear(){
-            // for(const key in this.formInline){
-            //     //获取每一个属性
-            //     this.formInline[key] = ""
-            // }
-            this.formInline = {};
-            //重新获取一下数据
-            this.getData();
-        },
-        getData(){
-            //传递需要的参数来获取
+        // clear(){
+        //     // for(const key in this.formInline){
+        //     //     //获取每一个属性
+        //     //     this.formInline[key] = ""
+        //     // }
+        //     this.formInline = {};
+        //     //重新获取一下数据
+        //     this.getData();
+        // },
+        // getData(){
+        //     //传递需要的参数来获取
             
-        }
+        // }
     },
 }
 </script>

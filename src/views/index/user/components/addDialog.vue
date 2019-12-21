@@ -27,7 +27,7 @@
 
 <script>
 // 导入 新增接口
-import { subjectAdd } from "../../../../api/subject.js";
+import { userAdd } from "../../../../api/user.js";
 export default {
     data() {
     return {
@@ -58,7 +58,7 @@ export default {
         this.$refs.addForm.validate(valid => {
             if (valid) {
             // 对
-            subjectAdd(this.addForm).then(res => {
+            userAdd(this.addForm).then(res => {
                 // window.console.log(res);
                 if (res.code === 201) {
                 this.$message.warning("学科编号已经存在了，请重新输入");

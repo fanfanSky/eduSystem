@@ -2,9 +2,7 @@
 import axios from "axios";
 
 // 导入 token的工具函数
-import {
-    getToken
-} from "./token.js";
+import {getToken} from "./token.js";
 
 // 统一设置 axios的设置
 // axios.defaults 只能设置一个 axios对象
