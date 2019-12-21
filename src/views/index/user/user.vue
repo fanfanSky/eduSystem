@@ -11,8 +11,9 @@
                 </el-form-item>
                 <el-form-item label="角色">
                     <el-select class="status" v-model="formInline.status" placeholder="请选择状态">
-                        <el-option label="超级管理员" value="1"></el-option>
-                        <el-option label="管理员" value="0"></el-option>
+                        <el-option label="管理员" value="2"></el-option>
+                        <el-option label="老师" value="3"></el-option>
+                        <el-option label="学生" value="4"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item>
@@ -31,9 +32,9 @@
                 <el-table-column prop="role_id" label="角色"></el-table-column>
                 <el-table-column prop="remark" label="备注"></el-table-column>
                 <el-table-column prop="status" label="状态">
-                    <template >   
-                        <span >启用</span>
-                        <!-- <span class="red" >禁用</span> -->
+                    <template slot-scope="scope">   
+                        <span v-if="scope.row.status===1">启用</span>
+                        <span class="red" v-else>禁用</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
@@ -70,7 +71,7 @@ import {userList} from "../../../api/user.js"
 export default {
     name:"user",
     //注册组件
-    component:{
+    components:{
         addDialog
     },
     data() {

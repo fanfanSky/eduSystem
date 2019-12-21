@@ -12,10 +12,16 @@
             <el-input v-model="addForm.phone" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="角色" prop="role_id" :label-width="formLabelWidth">
-            <el-input v-model="addForm.role_id" autocomplete="off"></el-input>
+            <el-select v-model="addForm.role_id" placeholder="请选择角色">
+                <el-option label="超级管理员" value="1"></el-option>
+                <el-option label="管理员" value="0"></el-option>
+            </el-select>
         </el-form-item>
         <el-form-item label="状态" :label-width="formLabelWidth">
-            <el-input v-model="addForm.status" autocomplete="off"></el-input>
+            <el-select v-model="addForm.status" placeholder="请选择状态">
+                <el-option label="启用" value="1"></el-option>
+                <el-option label="禁用" value="0"></el-option>
+            </el-select>
         </el-form-item>
         <el-form-item label="备注" :label-width="formLabelWidth">
             <el-input v-model="addForm.remark" autocomplete="off"></el-input>
