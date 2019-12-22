@@ -1,9 +1,3 @@
-/*
- * @Date: 2019-12-18 13:15:58
- * @LastEditTime : 2019-12-21 14:35:46
- * @Author: 江帆
- * @Github: https://github.com/J-Fan-Fan/
- */
 // 导入 axios
 import axios from "axios"; 
 
@@ -46,59 +40,5 @@ export function userLogout() {
 }
 
 
-// 获取用户列表
-export function userList(){
-    return instance({
-        url: "/user/list",
-        method:"get",
-        headers:{
-            token:getToken()
-        }
-    })
 
-}
-// 用户新增
-export function userAdd(data){
-    return instance({
-        url: "/user/add",
-        method:'post',
-        data,
-        headers:{
-            token:getToken()
-        }
-    })
-}
-//用户状态
-export function userStatus(data) {
-    return instance({
-        url: "/user/status",
-        method: 'post',
-        data,
-        headers: {
-            token: getToken()
-        }
-    })
-}
-//删除用户
-export function userRemove(data) {
-    return instance({
-        url: "/user/remove",
-        method: 'post',
-        data,
-        headers: {
-            token: getToken()
-        }
-    })
-}
-//删除用户
-export function userEdit(data) {
-    return instance({
-        url: "/user/edit",
-        method: 'post',
-        data,
-        headers: {
-            token: getToken()
-        }
-    })
-}
 
