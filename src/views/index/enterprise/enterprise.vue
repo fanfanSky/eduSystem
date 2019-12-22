@@ -34,14 +34,14 @@
                 <el-table-column prop="username" label="创建者" width="150"></el-table-column>
                 <el-table-column prop="create_time" label="创建日期" ></el-table-column>
                 <el-table-column prop="status" label="状态" >
-                    <template slot-scope="scope">   
-                        <span v-if="scope.row.status==1">启用</span>
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.status === 1">启用</span>
                         <span class="red" v-else>禁用</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
-                        <el-button type="text" >编辑</el-button>
+                        <el-button type="text" @click="showEdit(scope.row)">编辑</el-button>
                         <!-- scope.row 表示的是正行的数据 -->
                         <el-button type="text" @click="changeStatus(scope.row)">{{scope.row.status==1?"禁用":"启用"}}</el-button>
                         <el-button type="text" @click="removeItem(scope.row)">删除</el-button>
@@ -61,20 +61,23 @@
         </el-card>
         <!-- 新增框 -->
         <addDialog></addDialog>
-
+        <!-- 编辑框 -->
+        <editDialog ref="editDialog"></editDialog>
     </div>
 </template>
 
 <script>
 ///导入组件 新增框 
 import addDialog from "./components/addDialog.vue"
+///导入组件 编辑框 
+import editDialog from "./components/editDialog.vue"
 //导入接口
 import {enterpriseList,enterpriseRemove,enterpriseStatus} from "../../../api/enterprise.js"
 export default {
     name:"enterprise",
     // 注册组件
     components:{
-        addDialog
+        addDialog,editDialog
     },
     data() {
         return {
@@ -100,6 +103,8 @@ export default {
             // 新增对话框的数据
             //是否显示 新增企业 对话框
             addFormVisible:false,
+            // 是否显示 编辑框
+            editFormVisible:false,
             //页数据
             //页码
             page:1,
@@ -115,6 +120,12 @@ export default {
         this.getData();
     },
     methods: {
+        showEdit(item){
+            // 显示编辑框
+            this.editFormVisible = true;
+            // 传递给编辑框 数据
+            this.$refs.editDialog.editForm = JSON.parse(JSON.stringify(item))
+        },
         //切换状态
         changeStatus(item){
             //调用接口
@@ -166,6 +177,9 @@ export default {
             //     //获取每一个属性
             //     this.formInline[key] = ""
             // }
+
+            // 不能给空字符串
+            // this.formInline =''
             this.formInline = {};
             //重新获取一下数据
             this.getData();
