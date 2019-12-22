@@ -55,8 +55,8 @@ export default {
             // 添加表单验证规则
             addFormRules: {
                 username: [{ required: true, message: "用户名字不能为空", trigger: "blur" }],
-                email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }],
-                phone: [{ required: true, message: "电话不能为空", trigger: "blur" }],
+                email: [{ required: true, message: "邮箱不能为空", trigger: "blur" },{ validator: checkEmail, trigger: "blur" }],
+                phone: [{ required: true, message: "电话不能为空", trigger: "blur" },{ validator: checkPhone, trigger: "blur" }],
                 role_id: [{ required: true, message: "角色不能为空", trigger: "blur" }]
             }
         }
