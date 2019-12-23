@@ -1,5 +1,5 @@
 <template>
-  <!-- 编辑对话框 -->
+  <!-- 用户编辑对话框 -->
   <el-dialog class="edit-dialog" center title="修改用户" :visible.sync="$parent.editFormVisible">
     <el-form ref="editForm" :model="editForm" :rules="editFormRules">
       <el-form-item label="用户名" prop="username" :label-width="formLabelWidth">
