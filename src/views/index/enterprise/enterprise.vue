@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 头部卡片 -->
-        <el-card>
+        <el-card class="enterprise-container">
             <el-form :inline="true" :model="formInline" class="demo-form-inline">
                 <el-form-item label="企业编号">
                     <el-input class="number_1" v-model="formInline.eid"></el-input>
@@ -19,7 +19,7 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary">搜索</el-button>
+                    <el-button type="primary" @click="getData">搜索</el-button>
                     <el-button @click="clear">清除</el-button>
                     <el-button @click="addFormVisible = true" type="primary" icon="el-icon-plus">新增企业</el-button>
                 </el-form-item>
@@ -158,7 +158,7 @@ export default {
         },
         //页码改变
         handleCurrentChange(page){
-            window.console.log(page);
+            // window.console.log(page);
             //保存页码
             this.page = page;
             // 重新获取数据
@@ -166,7 +166,7 @@ export default {
         },
         // 页容量改变 回调函数
         handleSizeChange(size){
-            window.console.log(size);
+            // window.console.log(size);
             //保存页容量
             this.limit = size;
             //重新获取数据
@@ -193,7 +193,7 @@ export default {
                 ...this.formInline
             }).then(res=>{
                 if(res.code ===200){
-                    window.console.log(res);
+                    // window.console.log(res);
                     //保存请求到的列表数据
                     this.tableData = res.data.items;
                     //保存总条数
@@ -206,61 +206,63 @@ export default {
 </script>
 
 <style lang="less">
-.demo-form-inline {
-    .number_1, .establish {
-        width: 100px;
-    }
-    .name, .status {
-        width: 149px;
-    }
-    .search, .clear {
-        width: 70px;
-    }
-    .add {
-        width: 117px;
-    }
-    .add i {
-        width: 14px;
-        height: 14px;
-        font-weight: bold;    
-    }
-}
-div {
-    .body-card {
-        text-align: center;
-        margin-top: 19px;
-        .sbj_edite {
-            border: none;
-            background-color: rgba(0, 0, 0, 0);
-            color: rgb(64, 158, 255);
-            margin-left: 2px;
-            padding: 1px 3px 1px 3px;
+.enterprise-container {
+    .demo-form-inline {
+        .number_1, .establish {
+            width: 100px;
         }
-        .page {
-            margin-top: 30px;
+        .name, .status {
+            width: 149px;
         }
-        // 高亮的span
-        span.red {
-            color: #ff4b4b;
+        .search, .clear {
+            width: 70px;
         }
-        el-pagination .page {
-            margin-top: 30px;
+        .add {
+            width: 117px;
+        }
+        .add i {
+            width: 14px;
+            height: 14px;
+            font-weight: bold;    
         }
     }
-}
-// 对话框
-.el-dialog {
-width: 600px;
-    .el-dialog__header {
-        text-align: center;
-        background: linear-gradient(to right, #01c4fa, #1294fa);
-        padding-bottom: 20px;
-        .el-dialog__title {
-        color: white;
+    div {
+        .body-card {
+            text-align: center;
+            margin-top: 19px;
+            .sbj_edite {
+                border: none;
+                background-color: rgba(0, 0, 0, 0);
+                color: rgb(64, 158, 255);
+                margin-left: 2px;
+                padding: 1px 3px 1px 3px;
+            }
+            .page {
+                margin-top: 30px;
+            }
+            // 高亮的span
+            span.red {
+                color: #ff4b4b;
+            }
+            el-pagination .page {
+                margin-top: 30px;
+            }
         }
     }
-    .dialog-footer {
-        text-align: center
+    // 对话框
+    .el-dialog {
+    width: 600px;
+        .el-dialog__header {
+            text-align: center;
+            background: linear-gradient(to right, #01c4fa, #1294fa);
+            padding-bottom: 20px;
+            .el-dialog__title {
+            color: white;
+            }
+        }
+        .dialog-footer {
+            text-align: center
+        }
     }
 }
 </style>

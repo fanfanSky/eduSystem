@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 头部卡片 -->
-        <el-card>
+        <el-card class="user-container">
             <el-form :inline="true" :model="formInline" class="demo-form-inline">
                 <el-form-item label="用户名称">
                     <el-input class="number_1" v-model="formInline.username"></el-input>
@@ -70,7 +70,7 @@
 import addDialog from "./components/addDialog.vue"
 ///导入组件 编辑框 
 import editDialog from "./components/editDialog.vue"
-//导入接口
+//导入 用户列表接口 
 import {userList,userRemove,userStatus} from "../../../api/userManager.js"
 export default {
     name:"user",
@@ -90,7 +90,13 @@ export default {
                 role_id: ""
             },
             // table的数据
-            tableData:[],
+            tableData:[
+                {
+                    data:"2019-12-31",
+                    name:"江小帆",
+                    address:"广东省深圳市宝安区"
+                }
+            ],
             // 新增对话框的数据
             //是否显示 新增用户 对话框
             addFormVisible:false,
@@ -124,13 +130,14 @@ export default {
                 id:item.id
             }).then(res=>{
                 if(res.code==200){
+                    // window.console.log(res);
                     this.$message.success("状态已改变!!!");
                     this.getData();
                 }
             })
         },
-        //删除数据
-        removeItem(item){
+        //删除数据 
+        removeItem(item){ 
             this.$confirm(`确定要删除"${item.intro}"吗?`, '友情提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
@@ -149,7 +156,7 @@ export default {
         },
         //页码改变
         handleCurrentChange(page){
-            window.console.log(page);
+            // window.console.log(page);
             //保存页码
             this.page = page;
             // 重新获取数据
@@ -157,7 +164,7 @@ export default {
         },
         // 页容量改变 回调函数
         handleSizeChange(size){
-            window.console.log(size);
+            // window.console.log(size);
             //保存页容量
             this.limit = size;
             //重新获取数据
@@ -184,7 +191,7 @@ export default {
                 ...this.formInline
             }).then(res=>{
                 if(res.code ===200){
-                    window.console.log(res);
+                    // window.console.log(res);
                     //保存请求到的列表数据
                     this.tableData = res.data.items;
                     //保存总条数
@@ -197,7 +204,8 @@ export default {
 </script>
 
 <style lang="less">
-.demo-form-inline {
+.user-container {
+    .demo-form-inline {
     .number_1, .establish {
         width: 100px;
     }
@@ -254,4 +262,6 @@ width: 600px;
         text-align: center
     }
 }
+}
+
 </style>

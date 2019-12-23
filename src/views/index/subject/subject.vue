@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 头部卡片 -->
-        <el-card>
+        <el-card class="subject-container">
             <el-form :inline="true" :model="formInline" class="demo-form-inline">
                 <el-form-item label="学科编号">
                     <el-input class="number_1" v-model="formInline.rid"></el-input>
@@ -218,63 +218,66 @@ export default {
 </script>
 
 <style lang="less">
-.demo-form-inline {
-    .number_1, .establish {
-        width: 100px;
-    }
-    .name, .status {
-        width: 149px;
-    }
-    .search, .clear {
-        width: 70px;
-    }
-    .add {
-        width: 117px;
-    }
-    .add i {
-        width: 14px;
-        height: 14px;
-        font-weight: bold;    
-    }
-}
-div {
-    .body-card {
-        text-align: center;
-        margin-top: 19px;
-        .sbj_edite {
-            border: none;
-            background-color: rgba(0, 0, 0, 0);
-            color: rgb(64, 158, 255);
-            margin-left: 2px;
-            padding: 1px 3px 1px 3px;
+.subject-container {
+    .demo-form-inline {
+        .number_1, .establish {
+            width: 100px;
         }
-        .page {
-            margin-top: 30px;
+        .name, .status {
+            width: 149px;
         }
-        // 高亮的span
-        span.red {
-            color: #ff4b4b;
+        .search, .clear {
+            width: 70px;
         }
-        //分页
-        el-pagination .page {
-            margin-top: 30px;
+        .add {
+            width: 117px;
+        }
+        .add i {
+            width: 14px;
+            height: 14px;
+            font-weight: bold;    
         }
     }
-}
-
-// 对话框
-.el-dialog {
-width: 600px;
-    .el-dialog__header {
-        text-align: center;
-        background: linear-gradient(to right, #01c4fa, #1294fa);
-        padding-bottom: 20px;
-        .el-dialog__title {
-        color: white;
+    div {
+        .body-card {
+            text-align: center;
+            margin-top: 19px;
+            .sbj_edite {
+                border: none;
+                background-color: rgba(0, 0, 0, 0);
+                color: rgb(64, 158, 255);
+                margin-left: 2px;
+                padding: 1px 3px 1px 3px;
+            }
+            .page {
+                margin-top: 30px;
+            }
+            .sbj_status {
+                // 高亮的span
+                span.red {
+                    color: #ff4b4b;
+                }
+            }
+            
+            el-pagination .page {
+                margin-top: 30px;
+            }
         }
     }
-    .dialog-footer {
-        text-align: center
+    // 对话框
+    .el-dialog {
+    width: 600px;
+        .el-dialog__header {
+            text-align: center;
+            background: linear-gradient(to right, #01c4fa, #1294fa);
+            padding-bottom: 20px;
+            .el-dialog__title {
+            color: white;
+            }
+        }
+        .dialog-footer {
+            text-align: center
+        }
     }
 }
 
