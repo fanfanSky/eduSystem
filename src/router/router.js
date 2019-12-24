@@ -38,9 +38,9 @@ const routes = [{
     {
         path: "/index",
         component: index,
-        //redirect: '/index/subject',   //重定向到首页的学科页面
+        // redirect: '/index/subject',   //重定向到首页的学科页面
         meta:{
-            power:["管理员","老师","学生"]
+            power: ["超级管理员", "管理员", "老师", "学生"]
         },
         children: [
             {
@@ -48,7 +48,7 @@ const routes = [{
                 component: subject,
                 meta:{
                     //允许访问的角色
-                    power:["管理员","老师"]
+                    power: ["超级管理员", "管理员", "老师"]
                 }
             },
             {
@@ -56,7 +56,7 @@ const routes = [{
                 component: user,
                 meta:{
                     //允许访问的角色
-                    power: ["管理员"]
+                    power: ["超级管理员", "管理员"]
                 }
             },
             {
@@ -64,7 +64,7 @@ const routes = [{
                 component: chart,
                 meta:{
                     //允许访问的角色
-                    power: ["管理员", "老师"]
+                    power: ["超级管理员", "管理员", "老师"]
                 }
             },
             {
@@ -72,7 +72,7 @@ const routes = [{
                 component: question,
                 meta:{
                     //允许访问的角色
-                    power: ["管理员", "老师", "学生"]
+                    power: ["超级管理员", "管理员", "老师", "学生"]
                 }
             },
             {
@@ -80,7 +80,7 @@ const routes = [{
                 component: enterprise,
                 meta:{
                     //允许访问的角色
-                    power: ["管理员", "老师"]
+                    power: ["超级管理员", "管理员", "老师"]
                 }
             }
         ]
@@ -139,7 +139,18 @@ router.beforeEach((to, from, next) => {
                         res.data.data.avatar = process.env.VUE_APP_BASEURL + "/" + res.data.data.avatar;
                         // commit 提交到仓库中
                         store.commit("changeUserInfo", res.data.data);
-                        next();
+                        
+                        // 判断当前这个用户是否可以去
+                        // window.console.log(to)
+                        // window.console.log(res.data.data)
+                        // meta 访问的白名单匹配
+                        if (to.meta.power.includes(res.data.data.role)) {
+                            // 存在
+                            next();
+                        } else {
+                            // 当前的这个用户，的角色 无法访问这个页面
+                            Message.warning("你没有访问的权限哦，请联系管理员");
+                        }
                     }
                 } else if (res.data.code === 206) {
                     // 提示用户
