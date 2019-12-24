@@ -38,26 +38,50 @@ const routes = [{
     {
         path: "/index",
         component: index,
-        redirect: '/index/subject',   //重定向到首页的学科页面
-        children: [{
+        //redirect: '/index/subject',   //重定向到首页的学科页面
+        meta:{
+            power:["管理员","老师","学生"]
+        },
+        children: [
+            {
                 path: "subject", // /index/subject
-                component: subject
+                component: subject,
+                meta:{
+                    //允许访问的角色
+                    power:["管理员","老师"]
+                }
             },
             {
                 path: "user", // /index/user
-                component: user
+                component: user,
+                meta:{
+                    //允许访问的角色
+                    power: ["管理员"]
+                }
             },
             {
                 path: "chart", // /index/chart
-                component: chart
+                component: chart,
+                meta:{
+                    //允许访问的角色
+                    power: ["管理员", "老师"]
+                }
             },
             {
                 path: "question", // /index/question
-                component: question
+                component: question,
+                meta:{
+                    //允许访问的角色
+                    power: ["管理员", "老师", "学生"]
+                }
             },
             {
                 path: "enterprise", // /index/enterprise
-                component: enterprise
+                component: enterprise,
+                meta:{
+                    //允许访问的角色
+                    power: ["管理员", "老师"]
+                }
             }
         ]
     }
@@ -99,9 +123,15 @@ router.beforeEach((to, from, next) => {
                 if (res.data.code === 200) {
                     // token 是对的 放走
                     // window.console.log(store)
-                    store.state.userInfo = res.data.data;
+                    // store.state.userInfo = res.data.data;
                     // 用户头像 增加基地址
-                    store.state.userInfo.avatar = process.env.VUE_APP_BASEURL + "/" + store.state.userInfo.avatar;
+                    // store.state.userInfo.avatar = process.env.VUE_APP_BASEURL + "/" + store.state.userInfo.avatar;
+                    
+                    // 修改头像地址 基地址拼接上 图片地址
+                    res.data.data.avatar = process.env.VUE_APP_BASEURL + "/" + res.data.data.avatar;
+                    // commit 提交到仓库中
+                    store.commit("changeUserInfo", res.data.data);
+
                     next();
                 } else if (res.data.code === 206) {
                     // 提示用户

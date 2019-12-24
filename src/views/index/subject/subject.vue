@@ -33,7 +33,11 @@
                 <el-table-column prop="name" label="学科名称" ></el-table-column>
                 <el-table-column prop="short_name" label="简称" ></el-table-column>
                 <el-table-column prop="username" label="创建者" width="150"></el-table-column>
-                <el-table-column prop="create_time" label="创建日期" ></el-table-column>
+                <el-table-column prop="create_time" label="创建日期" >
+                    <template slot-scope="scope">
+                        {{scope.row.create_time | formatTime}}
+                    </template>
+                </el-table-column>
                 <el-table-column prop="status" label="状态" >
                     <template slot-scope="scope">   
                         <span v-if="scope.row.status === 1">启用</span>
@@ -238,46 +242,44 @@ export default {
             font-weight: bold;    
         }
     }
-    div {
-        .body-card {
-            text-align: center;
-            margin-top: 19px;
-            .sbj_edite {
-                border: none;
-                background-color: rgba(0, 0, 0, 0);
-                color: rgb(64, 158, 255);
-                margin-left: 2px;
-                padding: 1px 3px 1px 3px;
-            }
-            .page {
-                margin-top: 30px;
-            }
-            .sbj_status {
-                // 高亮的span
-                span.red {
-                    color: #ff4b4b;
-                }
-            }
-            
-            el-pagination .page {
-                margin-top: 30px;
-            }
+}
+.body-card {
+    text-align: center;
+    margin-top: 19px;
+    .sbj_edite {
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+        color: rgb(64, 158, 255);
+        margin-left: 2px;
+        padding: 1px 3px 1px 3px;
+    }
+    .page {
+        margin-top: 30px;
+    }
+    .sbj_status {
+        // 高亮的span
+        span.red {
+            color: #ff4b4b;
         }
     }
-    // 对话框
-    .el-dialog {
-    width: 600px;
-        .el-dialog__header {
-            text-align: center;
-            background: linear-gradient(to right, #01c4fa, #1294fa);
-            padding-bottom: 20px;
-            .el-dialog__title {
-            color: white;
-            }
+    
+    el-pagination .page {
+        margin-top: 30px;
+    }
+}
+// 对话框
+.el-dialog {
+width: 600px;
+    .el-dialog__header {
+        text-align: center;
+        background: linear-gradient(to right, #01c4fa, #1294fa);
+        padding-bottom: 20px;
+        .el-dialog__title {
+        color: white;
         }
-        .dialog-footer {
-            text-align: center
-        }
+    }
+    .dialog-footer {
+        text-align: center
     }
 }
 

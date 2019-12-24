@@ -206,26 +206,26 @@ export default {
 <style lang="less">
 .user-container {
     .demo-form-inline {
-    .number_1, .establish {
-        width: 100px;
-    }
-    .name, .status {
-        width: 149px;
-    }
-    .search, .clear {
-        width: 70px;
-    }
-    .add {
-        width: 117px;
-    }
-    .add i {
-        width: 14px;
-        height: 14px;
-        font-weight: bold;    
+        .number_1, .establish {
+            width: 100px;
+        }
+        .name, .status {
+            width: 149px;
+        }
+        .search, .clear {
+            width: 70px;
+        }
+        .add {
+            width: 117px;
+        }
+        .add i {
+            width: 14px;
+            height: 14px;
+            font-weight: bold;    
+        }
     }
 }
-div {
-    .body-card {
+.body-card {
         text-align: center;
         margin-top: 19px;
         .sbj_edite {
@@ -246,22 +246,20 @@ div {
             margin-top: 30px;
         }
     }
-}
 // 对话框
 .el-dialog {
-width: 600px;
-    .el-dialog__header {
-        text-align: center;
-        background: linear-gradient(to right, #01c4fa, #1294fa);
-        padding-bottom: 20px;
-        .el-dialog__title {
-        color: white;
+    width: 600px;
+        .el-dialog__header {
+            text-align: center;
+            background: linear-gradient(to right, #01c4fa, #1294fa);
+            padding-bottom: 20px;
+            .el-dialog__title {
+            color: white;
+            }
         }
-    }
-    .dialog-footer {
-        text-align: center
-    }
-}
+        .dialog-footer {
+            text-align: center
+        }
 }
 
 </style>

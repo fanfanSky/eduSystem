@@ -1,9 +1,3 @@
-/*
- * @Date: 2019-12-18 13:15:58
- * @LastEditTime: 2019-12-19 15:25:58
- * @Author: 江帆
- * @Github: https://github.com/J-Fan-Fan/
- */
 //导入Vue
 import Vue from 'vue'
 // 导入 根组件
@@ -29,10 +23,17 @@ Vue.config.productionTip = false
 // 测试环境变量
 // window.console.log(process.env.VUE_APP_BASEURL)
 
+// 过滤器只要保证运行 即可 不需使用值
+import './filters/filters.js'
+
+// 导入 自定义指令
+import './directives/directives.js'
+
 // 创建 Vue 实例
 new Vue({
   render: h => h(App),
   // 挂载到Vue示例上 router
   router, // router:router
+  // 挂载到Vue实例上 store
   store
 }).$mount('#app')
