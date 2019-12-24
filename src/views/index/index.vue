@@ -100,7 +100,7 @@ export default {
   },
   // 创建完成之前钩子 迁移到导航守卫中
   // beforeCreate() {
-  //   // 不存在
+  //   // 不存在  
   //   if (!getToken()) {
   //     // 提示用户
   //     this.$message.error("小样，没登录就要来首页，滑稽！");

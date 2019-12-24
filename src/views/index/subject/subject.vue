@@ -49,7 +49,7 @@
                         <el-button type="text" @click="showEdit(scope.row)">编辑</el-button>
                         <!-- scope.row 表示的是正行的数据 -->
                         <el-button type="text" @click="changeStatus(scope.row)">{{ scope.row.status === 1 ? "禁用" : "启用" }}</el-button>
-                        <el-button type="text" @click="removeItem(scope.row)">删除</el-button>
+                        <el-button type="text" v-power="['学生','老师']" @click="removeItem(scope.row)">删除</el-button>
                     </template>
                 </el-table-column>    
             </el-table>
