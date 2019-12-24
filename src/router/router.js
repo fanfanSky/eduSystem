@@ -127,12 +127,20 @@ router.beforeEach((to, from, next) => {
                     // 用户头像 增加基地址
                     // store.state.userInfo.avatar = process.env.VUE_APP_BASEURL + "/" + store.state.userInfo.avatar;
                     
-                    // 修改头像地址 基地址拼接上 图片地址
-                    res.data.data.avatar = process.env.VUE_APP_BASEURL + "/" + res.data.data.avatar;
-                    // commit 提交到仓库中
-                    store.commit("changeUserInfo", res.data.data);
-
-                    next();
+                    //状态判断
+                    if(res.data.data.status===0){
+                        //禁用状态
+                        Message.warning("兄弟，你被封号了，请等待管理员启用你,再访问");
+                        // 打回去
+                        next("/login");
+                    }else {
+                        //启用状态
+                        // 修改头像地址 基地址拼接上 图片地址
+                        res.data.data.avatar = process.env.VUE_APP_BASEURL + "/" + res.data.data.avatar;
+                        // commit 提交到仓库中
+                        store.commit("changeUserInfo", res.data.data);
+                        next();
+                    }
                 } else if (res.data.code === 206) {
                     // 提示用户
                     Message.warning("小样，就知道会伪造token，滚犊子");
