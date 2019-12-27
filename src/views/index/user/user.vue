@@ -45,7 +45,7 @@
                         <el-button type="text" @click="changeStatus(scope.row)">{{scope.row.status==1?"禁用":"启用"}}</el-button>
                         <el-button type="text" v-power="['学生','老师','管理员']" @click="removeItem(scope.row)">删除</el-button>
                     </template>
-                </el-table-column>    
+                </el-table-column>
             </el-table>
             <!-- 分页器 -->
             <el-pagination background class="page"
@@ -58,7 +58,7 @@
                 :total="total">
             </el-pagination> 
         </el-card>
-        <!-- 新增框 -->
+        <!-- 新增框添加 -->
         <addDialog></addDialog>
         <!-- 编辑框 -->
         <editDialog ref="editDialog"></editDialog>

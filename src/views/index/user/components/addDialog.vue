@@ -1,5 +1,5 @@
 <template>
-  <!-- 新增对话框 -->
+  <!-- 新增对话框哈哈 -->
   <el-dialog class="add-dialog" center title="新增用户" :visible.sync="$parent.addFormVisible">
     <el-form ref="addForm" :model="addForm" :rules="addFormRules">
       <el-form-item label="用户名" prop="username" :label-width="formLabelWidth">
