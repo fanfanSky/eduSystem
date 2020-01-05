@@ -45,7 +45,7 @@ export default {
     return {
       // 表单数据
       addForm: {
-        // 可以不写 字段名
+        // 这个可以不写 字段名
       },
       // 宽度
       formLabelWidth: "80px",
