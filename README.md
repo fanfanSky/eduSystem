@@ -1,4 +1,4 @@
-# heimamm
+# eduSystem
 
 ## Project setup
 ```
