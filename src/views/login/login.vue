@@ -5,7 +5,7 @@
       <!-- 标题 -->
       <div class="title-box">
         <img src="../../assets/login-logo.png" alt="" />
-        <span class="title">米猪云课</span>
+        <span class="title">后台管理登录</span>
         <i></i>
         <span class="sub-title">用户登录</span>
       </div>
