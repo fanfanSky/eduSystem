@@ -6,7 +6,7 @@
         <!-- 图标 -->
         <i @click="isCollapse = !isCollapse" class="el-icon-s-fold icon"></i>
         <img class="logo" src="../../assets/index_logo.png" alt="" />
-        <span class="title">米猪云课</span>
+        <span class="title">后台管理首页</span>
       </div>
       <div class="right">
         <img class="user-icon" :src="userInfo.avatar" alt="" />
